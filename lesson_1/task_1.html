@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Задача 1</title>
+</head>
+<body>
+    <script type="text/javascript">
+      var tempCelsius = parseInt(prompt('Задайте температуру в градусах по Цельсию: '));
+
+      alert((isNaN(tempCelsius)) ?
+        'Ошибка, введенное значение должно быть числом!' :
+        `Температура в градусах по Фаренгейту: ${((9 / 5) * tempCelsius + 32)}`);
+    </script>
+</body>
+</html>
