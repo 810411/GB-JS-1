@@ -1,8 +1,8 @@
-function getRandNum() {
-  return Math.round(Math.random() * (9 - (-9)) + (-9));
+function getRandNum(minimax) {
+  return Math.round(Math.random() * (minimax - (-minimax)) + (-minimax));
 }
 
-var a = getRandNum(); b = getRandNum();
+var a = getRandNum(9); b = getRandNum(9);
 
 console.log(`a = ${a}, b = ${b}`);
 
