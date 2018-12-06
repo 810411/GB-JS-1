@@ -148,9 +148,9 @@ function createBoard() {
 
       if (x !== 0 && x !== BOARD_SIZE + 1 && y !== 0 && y !== BOARD_SIZE + 1) {
         if ((x + y) % 2 === 0) {
-          cell.style.backgroundColor = 'sienna';
-        } else {
           cell.style.backgroundColor = 'beige';
+        } else {
+          cell.style.backgroundColor = 'sienna';
         }
         colNum++;
         cell.id = `${String.fromCharCode(colNum) + rowNum}`;
