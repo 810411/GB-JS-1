@@ -1,0 +1,14 @@
+.blink {
+    -webkit-animation: blink 3s linear infinite;
+    animation: blink 3s linear infinite;
+}
+@-webkit-keyframes blink {
+    0% { color: rgba(232, 69, 69, 1); }
+    50% { color: rgba(232, 69, 69, 0.25); }
+    100% { color: rgba(232, 69, 69, 1); }
+}
+@keyframes blink {
+    0% { color: rgba(232, 69, 69, 1); }
+    50% { color: rgba(232, 69, 69, 0.25); }
+    100% { color: rgba(232, 69, 69, 1); }
+}
