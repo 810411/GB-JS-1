@@ -4,12 +4,6 @@ const GAME = document.querySelector('#game');
 const BOARD = GAME.querySelector('#board');
 const BOARD_SIZE = 8;
 
-console.log(GAME);
-console.log(BOARD);
-
-
-let boardWidth = parseInt(window.getComputedStyle(BOARD).width);
-
 class Chessman {
   constructor(x, y, unicode) {
     this.x = x;
