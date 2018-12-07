@@ -1,8 +1,12 @@
 'use strict';
 
-const GAME = document.querySelector('.game');
-const BOARD = GAME.querySelector('.board');
+const GAME = document.querySelector('#game');
+const BOARD = GAME.querySelector('#board');
 const BOARD_SIZE = 8;
+
+console.log(GAME);
+console.log(BOARD);
+
 
 let boardWidth = parseInt(window.getComputedStyle(BOARD).width);
 
@@ -12,7 +16,8 @@ class Chessman {
     this.y = y;
     this.unicode = unicode;
 
-    this.DOMentity = document.createElement("span");
+    this.DOMentity = document.createElement("div");
+    this.DOMentity.classList.add('figure');
     this.DOMentity.innerHTML = this.unicode;
     this.DOMentity.style.cursor = 'pointer';
 
@@ -20,9 +25,13 @@ class Chessman {
 
     this.DOMentity.addEventListener('mouseover', () => {
       this.DOMentity.classList.add('blink');
+      this.DOMentity.parentElement.style.outline = '2px solid red';
     });
     this.DOMentity.addEventListener('mouseout', () => {
       this.DOMentity.classList.remove('blink');
+      this.DOMentity.parentElement.style.outline = '';
+    });
+    this.DOMentity.addEventListener('mousedown', () => {
     });
   }
 
@@ -31,131 +40,128 @@ class Chessman {
     cell.appendChild(this.DOMentity);
   }
 
-  turn(x, y) {}
+  turn(x, y) {
+  }
 }
 
-class WhitePawn extends Chessman{
+class WhitePawn extends Chessman {
   constructor(x, y) {
     super(x, y, '&#9817;');
   }
 }
 
-class BlackPawn extends Chessman{
+class BlackPawn extends Chessman {
   constructor(x, y) {
     super(x, y, '&#9823;');
   }
 }
 
-class WhiteKing extends Chessman{
+class WhiteKing extends Chessman {
   constructor(x, y) {
     super(x, y, '&#9812;');
   }
 }
 
-class BlackKing extends Chessman{
+class BlackKing extends Chessman {
   constructor(x, y) {
     super(x, y, '&#9818;');
   }
 }
 
-class WhiteQueen extends Chessman{
+class WhiteQueen extends Chessman {
   constructor(x, y) {
     super(x, y, '&#9813;');
   }
 }
 
-class BlackQueen extends Chessman{
+class BlackQueen extends Chessman {
   constructor(x, y) {
     super(x, y, '&#9819;');
   }
 }
 
-class WhiteHorse extends Chessman{
+class WhiteHorse extends Chessman {
   constructor(x, y) {
     super(x, y, '&#9816;');
   }
 }
 
-class BlackHorse extends Chessman{
+class BlackHorse extends Chessman {
   constructor(x, y) {
     super(x, y, '&#9822;');
   }
 }
 
-class WhiteBishop extends Chessman{
+class WhiteBishop extends Chessman {
   constructor(x, y) {
     super(x, y, '&#9815;');
   }
 }
 
-class BlackBishop extends Chessman{
+class BlackBishop extends Chessman {
   constructor(x, y) {
     super(x, y, '&#9821;');
   }
 }
 
-class WhiteRook extends Chessman{
+class WhiteRook extends Chessman {
   constructor(x, y) {
     super(x, y, '&#9814;');
   }
 }
 
-class BlackRook extends Chessman{
+class BlackRook extends Chessman {
   constructor(x, y) {
     super(x, y, '&#9820;');
   }
 }
 
 function createBoard() {
+  const table = document.createElement('table');
 
-  let size = boardWidth/(BOARD_SIZE + 1);
+  table.classList.add('table');
+  table.setAttribute("cellspacing", "0");
+  BOARD.appendChild(table);
+
   let rowNum = (BOARD_SIZE + 1);
 
   for (let x = 0; x < BOARD_SIZE + 2; x++) {
     let colNumText = 65, colNum = 64; // коды символов для буквенной нумерации
-    let row = document.createElement('div');
 
+    let row = document.createElement('tr');
     row.classList.add('row');
-    BOARD.appendChild(row);
+    table.appendChild(row);
 
     for (let y = 0; y < BOARD_SIZE + 2; y++) {
-      let cell = document.createElement('div');
-
-      cell.style.width = size + 'px';
-      cell.style.height = size + 'px';
-      cell.style.backgroundColor = '#7C3E2D';
-      cell.style.lineHeight = size + 'px';
-      cell.style.fontSize = size / 50 + 'em';
+      let cell = document.createElement('td');
+      cell.classList.add('cell');
 
       if (x === 0 || x === BOARD_SIZE + 1) {
-        cell.style.height = size / 2 + 'px';
+        cell.classList.add('border', 'horizontalborder');
 
         if (y !== 0 && y !== BOARD_SIZE + 1) {
-          cell.style.color = 'beige';
-          cell.style.lineHeight = size / 2 + 'px';
           cell.textContent = String.fromCharCode(colNumText++);
         }
       }
 
       if (y === 0 || y === BOARD_SIZE + 1) {
-        cell.style.width = size / 2 + 'px';
+        cell.classList.add('border', 'verticalborder');
 
         if (x !== 0 && x !== BOARD_SIZE + 1) {
-          cell.style.color = 'beige';
           cell.textContent = rowNum;
         }
       }
 
       if (x !== 0 && x !== BOARD_SIZE + 1 && y !== 0 && y !== BOARD_SIZE + 1) {
         if ((x + y) % 2 === 0) {
-          cell.style.backgroundColor = 'beige';
+          cell.classList.add('bright');
         } else {
-          cell.style.backgroundColor = 'sienna';
+          cell.classList.add('dark');
         }
         colNum++;
         cell.id = `${String.fromCharCode(colNum) + rowNum}`;
-        cell.style.fontSize = size / 20 + 'em';
       }
+
       row.appendChild(cell);
     }
     rowNum--;
