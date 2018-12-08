@@ -16,10 +16,10 @@ const prevPhoto = document.getElementById('prevPhoto');
 let step = 0;
 
 function setCurrentPhoto() {
-  if (step > 4) {
+  if (step > imgGalleryArr.length - 1) {
     step = 0;
   } else if (step < 0) {
-    step = 4;
+    step = imgGalleryArr.length - 1;
   }
   currentPhoto.src = `../task_2/img/${imgGalleryArr[step]}.jpg`;
 }
